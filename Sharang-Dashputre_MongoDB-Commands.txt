@@ -1,0 +1,71 @@
+db.Options.insert(
+[	
+	{_id:'o1', text:'Mumbai'},
+	{_id:'o2', text:'Bengaluru'},
+	{_id:'o3', text:'Hyderabad'},
+	{_id:'o4', text:'New Delhi'},
+	{_id:'o5', text:'19 September'},
+	{_id:'o6', text:'21 March'},
+	{_id:'o7', text:'26 March'},
+	{_id:'o8', text:'15 August'},
+	{_id:'o9', text:'4025'},
+	{_id:'o10', text:'4125'},
+	{_id:'o11', text:'4255'},
+	{_id:'o12', text:'4325'},
+	{_id:'o13', text:'3'},
+	{_id:'o14', text:'4'},
+	{_id:'o15', text:'5'},
+	{_id:'o16', text:'1'},
+	{_id:'o17', text:'Wrong'},
+	{_id:'o18', text:'Wrong'},
+	{_id:'o19', text:'Wrong'},
+	{_id:'o20', text:'Correct!'},
+])
+
+db.Questions.insert(
+[	
+	{_id:'q1', text:'What is the capital of India?', options:['o1','o2','o3'], answer:'o4'},
+	{_id:'q2', text:'When is Independence day celebrated in India?', options:['o5','o6','o7'], answer:'o8'},
+	{_id:'q3', text:'65 times 65 = ?', options:['o9','o10','o12'], answer:'o11'},
+	{_id:'q4', text:'1 divided by 1 = ?', options:['o13','o14','o15'], answer:'o16'},
+	{_id:'q5', text:'This is a common question in Assesments 1 and 2', options:['o17','o18','o19'], answer:'o20'}
+])
+
+db.Assessments.insert(
+[
+	{_id:'a1', name:'General Knowledge', questions:['q1','q2','q5']},
+	{_id:'a2', name:'Mathematics', questions:['q3','q4','q5']}
+])
+
+db.Users.insert(
+[
+	{_id:'user_1', name:'User One', role:'r1', password:'user_1123'},
+	{_id:'user_2', name:'User Two', role:'r1', password:'user_2123'},
+	{_id:'admin', name:'Default Administrator', role:'r0', password:'admin123'},
+	{_id:'user_3', name:'User Three', role:'r1', password:'user_3123'}
+])
+
+db.Roles.insert(
+[
+	{_id:'r1', name:'Student', url:'./welcome_student.html'},
+	{_id:'r0', name:'Administrator', url:'./welcome_admin.html'}
+])
+
+
+Display all question texts:
+var questions = db.Questions.find({}, {text:1, _id:0}); questions
+
+Display users and their passwords:
+var result = db.Users.find({}, {role:0, _id:0}); result
+
+Display users whoose name starts with 'u':
+var result = db.Users.find({_id: /^u/}); result
+
+Change password of user_2:
+db.Users.update({_id:'user_2'}, {$set:{password:'1234'}})
+
+Delete a collection:
+db.collection_name.drop()
+
+Remove document with name='User One'
+db.Users.remove( { 'name' : 'User One' } )
